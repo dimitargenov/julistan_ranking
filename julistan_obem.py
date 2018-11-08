@@ -1,6 +1,7 @@
 from StravaRequest import StravaRequest
 import StravaConfig
 from GoogleSpreadSheet import GoogleSpreadSheet
+import numpy as np
 
 JULBEM_SPREADSHEET_ID = '1UsFnri7Dfcl0ETlHfVSOMrsCIGoCQOnLIQHC__GMwWs'
 SAMPLE_RANGE_NAME = 'Class Data!A2:E'
@@ -16,10 +17,14 @@ def calculateCoefJulqga(paceMin, paceSec):
 def calculatePoints(distance, elevation, kj):
     return round((distance + elevation*0.01)*kj, 1)
 
+def sortByPoints(values):
+    return sorted(values, key=lambda a_entry: a_entry[6], reverse = True) 
+
 def main():
     strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
     leaderboard = strava.getLeaderboard()
-    values = [['Rank', 'Athlete', 'Distance', 'Elevation gain (m)', 'Pace', 'KJ', 'Points']]
+    tableHeaderRow = ['Rank', 'Athlete', 'Distance', 'Elevation gain (m)', 'Pace', 'KJ', 'Points']
+    values = []
     for row in leaderboard.json()['data']:
         paceMin = 0
         paceSec = 0
@@ -41,10 +46,13 @@ def main():
         #num_activities
         values.append(athlete)
 
+    sortedResults = sortByPoints(values)
+    sortedResults.insert(0, tableHeaderRow)
+
     ## Write to spreadsheet
     spreadsheet = GoogleSpreadSheet()
     range_name = "Sheet1!B3:M"
-    spreadsheet.write(range_name, values, JULBEM_SPREADSHEET_ID)
+    spreadsheet.write(range_name, sortedResults, JULBEM_SPREADSHEET_ID)
 
 if __name__ == '__main__':
     main()
