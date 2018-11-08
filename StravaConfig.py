@@ -1,0 +1,10 @@
+url = "https://www.strava.com/clubs/320080/leaderboard"
+
+headers = {
+    'accept': "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript",
+    'Cache-Control': "no-cache",
+    'cookie': "optimizelyEndUserId=oeu1514544200278r0.041143166183667645; optimizelySegments=%7B%7D; optimizelyBuckets=%7B%7D; ajs_group_id=null; ajs_anonymous_id=%225b6328b1-e71a-4883-b44c-7f832371ec4f%22; _ga=GA1.2.563753946.1514544201; ajs_user_id=16992394; mp_b36aa4f2a42867e23d8f9907ea741d91_mixpanel=%7B%22distinct_id%22%3A%20%2278493daa-5a11-89ba-889e-006f9f85a443%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.bg%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.bg%22%7D; experiment_id=c3f14200d79ec8f6ed8e00ab5cfed8cc; _strava4_session=tgu9989dnkoe3qer77eigut3v8kqbldo; sp=4b88508a-4358-4bec-bc90-441721e6248c; _gid=GA1.2.1729596465.1541411392; _fbp=fb.1.1541582396281.641465687; fbm_284597785309=base_domain=.www.strava.com; _sp_ses.047d=*; fbsr_284597785309=-0DSJZCno24nEoOqj_qMG5wW3owJTQR5IDqI_yoH1OI.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImNvZGUiOiJBUURyYXlGQVhsLVlRSE1nY0xDQkZyUGZsS3k2c0Zqcy00Y2JUMGNKMVI2QVhtYmFZSW5YamRfeGdBZEVOWnE5NWZxOUlmRzJ4WkFTSFM2c1VOMklnZGJhaU5kREd4b0tvZHJ6aFc3aklqbG54cEFleXpyMXQ2MGpnRzRrNnMyeERqYWhpcmxiTFZnejhHLVphQXhqMl9Ma3pCWVQyRF9iNTBSMVFWU0V6NUZLcnhkT1ZmQWk3Rm5Mbk1QV1lRUjBoOWZpdnlldHF6ZVcyMDNKU015akdSUjRCdjlCbEpCZmxfOTVIcE9VblpobEFVMHYyaVYtWGhNeU4zaXczZ0pJY2tkbGNRWU5LWFZBZVRNbzdlbXlhdmtCNG1Tbm1UMjhYZmE1WDJlUXhVUXFQRlktUjE1bXdMemktVkw4RWhfdHFXQUhDUnVsTzNmdHRhamZhVnkzOUp6cSIsImlzc3VlZF9hdCI6MTU0MTU4OTU5MSwidXNlcl9pZCI6IjEwMjEwNDI3NzMyMTE1Njk2In0; _sp_id.047d=b4c0e32c-fadd-4852-851a-a1ee0b881b20.1534925976.106.1541589708.1541585348.955aa9dd-1f21-44bf-b007-dfba3861c48e; _dc_gtm_UA-6309847-24=1",
+    'user-agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/65.0.3325.181 Chrome/65.0.3325.181 Safari/537.36",
+    'x-requested-with': "XMLHttpRequest",
+    'Postman-Token': "68475eea-a90b-36f6-7a2f-1487327d499d"
+}
