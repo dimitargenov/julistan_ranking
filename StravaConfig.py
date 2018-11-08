@@ -1,4 +1,4 @@
-url = "https://www.strava.com/clubs/320080/leaderboard"
+url = "https://www.strava.com/clubs/320080/leaderboard?week_offset=0"
 
 headers = {
     'accept': "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript",
