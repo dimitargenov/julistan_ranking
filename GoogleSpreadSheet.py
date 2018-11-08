@@ -5,12 +5,13 @@ from oauth2client import file, client, tools
 
 class GoogleSpreadSheet:
 	scopes = 'https://www.googleapis.com/auth/spreadsheets'
+	credentials_file = '/home/dimitar/scripts/google_sheets/credentials.json'
 
 	def __init__(self):
 		store = file.Storage('token.json')
 		creds = store.get()
 		if not creds or creds.invalid:
-			flow = client.flow_from_clientsecrets('credentials.json', self.scopes)
+			flow = client.flow_from_clientsecrets(self.credentials_file, self.scopes)
 			creds = tools.run_flow(flow, store)
 		self.service = build('sheets', 'v4', http=creds.authorize(Http()))
 
