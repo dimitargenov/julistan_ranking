@@ -53,23 +53,25 @@ def fillInAthleteInfo(row):
     return athlete
 
 def main():
-    strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
-    leaderboard = strava.getLeaderboard()
-    tableHeaderRow = ['Athlete', 'Distance', 'Elevation gain (m)', 'Pace', 'KJ', 'Points']
-    values = []
-    counter = 1
-    for row in leaderboard.json()['data']:
-        values.append(fillInAthleteInfo(row))
-        counter += 1
+    # strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
+    # leaderboard = strava.getLeaderboard()
+    # tableHeaderRow = ['Athlete', 'Distance', 'Elevation gain (m)', 'Pace', 'KJ', 'Points']
+    # values = []
+    # counter = 1
+    # for row in leaderboard.json()['data']:
+    #     values.append(fillInAthleteInfo(row))
+    #     counter += 1
 
-    sortedResults = sortByPoints(values)
-    sortedResults.insert(0, tableHeaderRow)
-    sortedResults.append(['Last update', now.strftime("%Y-%m-%d %H:%M")])
+    # sortedResults = sortByPoints(values)
+    # sortedResults.insert(0, tableHeaderRow)
+    # sortedResults.append(['Last update', now.strftime("%Y-%m-%d %H:%M")])
 
-    ## Write to spreadsheet
+    ## Read from spreadsheet
+    athletes = []
     spreadsheet = GoogleSpreadSheet()
-    rangeName = "W2!C3:M"
-    spreadsheet.write(rangeName, sortedResults, JULBEM_SPREADSHEET_ID)
+    rangeName = "W1!C3:M"
+    w1 = spreadsheet.read(rangeName, JULBEM_SPREADSHEET_ID)
+    athletes = addToGeneral(w1)
 
 if __name__ == '__main__':
     main()

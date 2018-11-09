@@ -2,16 +2,20 @@ from __future__ import print_function
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
+import os
+
+currentDirectory = os.path.dirname(os.path.abspath(__file__))
 
 class GoogleSpreadSheet:
 	scopes = 'https://www.googleapis.com/auth/spreadsheets'
-	credentials_file = '/home/dimitar/scripts/google_sheets/credentials.json'
+	credentialsFile = currentDirectory + '/credentials.json'
+	tokenFile = currentDirectory + '/token.json'
 
 	def __init__(self):
-		store = file.Storage('token.json')
+		store = file.Storage(self.tokenFile)
 		creds = store.get()
 		if not creds or creds.invalid:
-			flow = client.flow_from_clientsecrets(self.credentials_file, self.scopes)
+			flow = client.flow_from_clientsecrets(self.credentialsFile, self.scopes)
 			creds = tools.run_flow(flow, store)
 		self.service = build('sheets', 'v4', http=creds.authorize(Http()))
 
@@ -47,11 +51,18 @@ class GoogleSpreadSheet:
 		find_replace_response = response.get('replies')[1].get('findReplace')
 		print('{0} replacements made.'.format(find_replace_response.get('occurrencesChanged')))
 
-	def write(self, range_name, values, spreadsheet_id):
+	def write(self, rangeName, values, spreadsheetId):
 		body = {
 		    'values': values
 		}
 		result = self.service.spreadsheets().values().update(
-		    spreadsheetId=spreadsheet_id, range=range_name,
+		    spreadsheetId=spreadsheetId, range=rangeName,
 		    valueInputOption="RAW", body=body).execute()
-		print('{0} cells updated.'.format(result.get('updatedCells')));        
+		print('{0} cells updated.'.format(result.get('updatedCells')));
+
+	def read(self, rangeName, spreadsheetId):
+		result = self.service.spreadsheets().values().get(
+		    spreadsheetId=spreadsheetId, range=rangeName).execute()
+		numRows = result.get('values') if result.get('values')is not None else 0
+
+		return numRows

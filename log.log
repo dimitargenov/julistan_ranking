@@ -1,0 +1,59 @@
+/usr/local/lib/python2.7/dist-packages/oauth2client/_helpers.py:255: UserWarning: Cannot access token.json: No such file or directory
+  warnings.warn(_MISSING_FILE_MESSAGE.format(filename))
+
+Failed to start a local webserver listening on either port 8080
+or port 8090. Please check your firewall settings and locally
+running programs that may be blocking or using those ports.
+
+Falling back to --noauth_local_webserver and continuing with
+authorization.
+
+
+Go to the following link in your browser:
+
+    https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fspreadsheets&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&client_id=714701998643-6dns2vg3ab61lpebpmgb28gt5l3ejfib.apps.googleusercontent.com&access_type=offline
+
+Enter verification code: Traceback (most recent call last):
+  File "/home/dimitar/scripts/google_sheets/julistan_obem.py", line 74, in <module>
+    main()
+  File "/home/dimitar/scripts/google_sheets/julistan_obem.py", line 69, in main
+    spreadsheet = GoogleSpreadSheet()
+  File "/home/dimitar/scripts/google_sheets/GoogleSpreadSheet.py", line 15, in __init__
+    creds = tools.run_flow(flow, store)
+  File "/usr/local/lib/python2.7/dist-packages/oauth2client/_helpers.py", line 133, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/oauth2client/tools.py", line 240, in run_flow
+    code = input('Enter verification code: ').strip()
+EOFError: EOF when reading a line
+/usr/local/lib/python2.7/dist-packages/oauth2client/_helpers.py:255: UserWarning: Cannot access token.json: No such file or directory
+  warnings.warn(_MISSING_FILE_MESSAGE.format(filename))
+
+Failed to start a local webserver listening on either port 8080
+or port 8090. Please check your firewall settings and locally
+running programs that may be blocking or using those ports.
+
+Falling back to --noauth_local_webserver and continuing with
+authorization.
+
+
+Go to the following link in your browser:
+
+    https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fspreadsheets&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&client_id=714701998643-6dns2vg3ab61lpebpmgb28gt5l3ejfib.apps.googleusercontent.com&access_type=offline
+
+Enter verification code: Traceback (most recent call last):
+  File "/home/dimitar/scripts/google_sheets/julistan_obem.py", line 75, in <module>
+    main()
+  File "/home/dimitar/scripts/google_sheets/julistan_obem.py", line 70, in main
+    spreadsheet = GoogleSpreadSheet()
+  File "/home/dimitar/scripts/google_sheets/GoogleSpreadSheet.py", line 15, in __init__
+    creds = tools.run_flow(flow, store)
+  File "/usr/local/lib/python2.7/dist-packages/oauth2client/_helpers.py", line 133, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/oauth2client/tools.py", line 240, in run_flow
+    code = input('Enter verification code: ').strip()
+EOFError: EOF when reading a line
+212 cells updated.
+212 cells updated.
+212 cells updated.
+212 cells updated.
+212 cells updated.
