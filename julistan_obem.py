@@ -51,6 +51,7 @@ def main():
     strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
     leaderboard = strava.getLeaderboard()
     tableHeaderRow = ['Athlete', 'Distance[km]', 'D+[m]', 'Pace[min/km]', 'KJ', 'Total']
+
     values = []
     counter = 1
     for row in leaderboard.json()['data']:
@@ -63,7 +64,7 @@ def main():
 
     ## Write to spreadsheet
     spreadsheet = GoogleSpreadSheet()
-    rangeName = "W2!C3:M"
+    rangeName = "W3!C3:M"
     spreadsheet.write(rangeName, sortedResults, JULBEM_SPREADSHEET_ID)
 
 if __name__ == '__main__':

@@ -26,8 +26,8 @@ def addToGeneral(weekRanking, athletes):
             athletes[row[0]].append(1)
             athletes[row[0]].append(2)
         athletes[row[0]][0] = row[0]
-        athletes[row[0]][1] += float(row[5])*1.0
-        athletes[row[0]][2] += float(row[1])*1.0
+        athletes[row[0]][1] += float(row[5])
+        athletes[row[0]][2] += float(row[1])
 
     return athletes
 
@@ -35,7 +35,7 @@ def main():
     ## Read from spreadsheet
     athletes = {}
     spreadsheet = GoogleSpreadSheet()
-    weekSheets = ['W1', 'W2']
+    weekSheets = ['W1', 'W2', 'W3']
 
     for sheet in weekSheets:
         rangeName = sheet + "!C3:M"
