@@ -44,27 +44,45 @@ def fillInAthleteInfo(row):
     athlete.append(pace)
     athlete.append(kj)
     athlete.append(points)
-    
+
     return athlete
+
+def addRank(athletes):
+    counter = 0
+    for row in athletes:
+        counter += 1
+        row.insert(0, counter)
+
+def addDiff(athletes):
+    leaderPoints = 0
+    counter = 0
+    for row in athletes:
+        if leaderPoints == 0:
+            leaderPoints = row[6]
+            continue
+        diff = float(leaderPoints) - float(row[6])
+        row.append(diff)
 
 def main():
     strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
     leaderboard = strava.getLeaderboard()
-    tableHeaderRow = ['Athlete', 'Distance[km]', 'D+[m]', 'Pace[min/km]', 'KJ', 'Total']
+    tableHeaderRow = ['Pos','Athlete', 'Distance[km]', 'D+[m]', 'Pace[min/km]', 'KJ', 'Total', 'Diff']
 
     values = []
     counter = 1
+    previousPoints = 0
     for row in leaderboard.json()['data']:
         values.append(fillInAthleteInfo(row))
-        counter += 1
 
     sortedResults = sortByPoints(values)
+    addRank(sortedResults)
+    addDiff(sortedResults)
     sortedResults.insert(0, tableHeaderRow)
-    sortedResults.append(['Last update', now.strftime("%Y-%m-%d %H:%M")])
+    sortedResults.append(['','Last update', now.strftime("%Y-%m-%d %H:%M")])
 
     ## Write to spreadsheet
     spreadsheet = GoogleSpreadSheet()
-    rangeName = "W3!C3:M"
+    rangeName = "W4!B3:M"
     spreadsheet.write(rangeName, sortedResults, JULBEM_SPREADSHEET_ID)
 
 if __name__ == '__main__':
