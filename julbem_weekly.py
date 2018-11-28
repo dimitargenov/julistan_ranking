@@ -82,7 +82,7 @@ def main():
 
     ## Write to spreadsheet
     spreadsheet = GoogleSpreadSheet()
-    rangeName = "W4!B3:M"
+    rangeName = "W5!B3:M"
     spreadsheet.write(rangeName, sortedResults, JULBEM_SPREADSHEET_ID)
 
 if __name__ == '__main__':

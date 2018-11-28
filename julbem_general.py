@@ -49,14 +49,14 @@ def main():
     ## Read from spreadsheet
     athletes = {}
     spreadsheet = GoogleSpreadSheet()
-    weekSheets = ['W1', 'W2', 'W3', 'W4']
+    weekSheets = ['W1', 'W2', 'W3', 'W4', 'W5']
 
     for sheet in weekSheets:
         rangeName = sheet + "!C3:M"
         wRanking = spreadsheet.read(rangeName, JULBEM_SPREADSHEET_ID)
         athletes = addToGeneral(wRanking, athletes)
 
-    tableHeaderRow = ['Athlete', 'Total', 'Distance[km]', 'Elevation[m]', 'Diff']
+    tableHeaderRow = ['Athlete', 'Total', 'Distance[km]', 'D+[m]', 'Diff']
 
     sortedResults = sortByPoints(athletes.values())
     addDiff(sortedResults)
