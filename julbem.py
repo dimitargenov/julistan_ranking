@@ -7,7 +7,8 @@ from oauth2client import file, client, tools
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
+#SAMPLE_SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
+SAMPLE_SPREADSHEET_ID = '1TwkR8Z3_lVHx1FF3XcGoK_huhIBeJVmHWroH-DUHnjo'
 SAMPLE_RANGE_NAME = 'Class Data!A2:E'
 
 def main():

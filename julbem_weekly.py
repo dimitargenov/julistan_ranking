@@ -7,7 +7,11 @@ import math
 
 now = datetime.datetime.now()
 
-JULBEM_SPREADSHEET_ID = '1UsFnri7Dfcl0ETlHfVSOMrsCIGoCQOnLIQHC__GMwWs'
+#2018 sheet
+#JULBEM_SPREADSHEET_ID = '1UsFnri7Dfcl0ETlHfVSOMrsCIGoCQOnLIQHC__GMwWs'
+
+#2019
+JULBEM_SPREADSHEET_ID = '1TwkR8Z3_lVHx1FF3XcGoK_huhIBeJVmHWroH-DUHnjo'
 TICHANE_COEF = 6
 
 def calculatePace(time, distance):
@@ -82,7 +86,7 @@ def main():
 
     ## Write to spreadsheet
     spreadsheet = GoogleSpreadSheet()
-    rangeName = "W5!B3:M"
+    rangeName = "W1!B3:M"
     spreadsheet.write(rangeName, sortedResults, JULBEM_SPREADSHEET_ID)
 
 if __name__ == '__main__':
