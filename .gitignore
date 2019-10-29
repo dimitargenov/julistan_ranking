@@ -1,5 +1,5 @@
-token.json
-credentials.json
+#token.json
+#credentials.json
 .git
 *.pyc
 log.log

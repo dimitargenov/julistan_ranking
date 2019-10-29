@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from StravaRequest import StravaRequest
 import StravaConfig
 from GoogleSpreadSheet import GoogleSpreadSheet
 import numpy as np
 import datetime
 import math
+from time import strftime
+from time import gmtime
 
 now = datetime.datetime.now()
 
@@ -25,7 +29,7 @@ def calculatePoints(distance, elevation, kj):
     return round((distance + elevation*0.01)*kj, 1)
 
 def sortByPoints(values):
-    return sorted(values, key=lambda a_entry: a_entry[5], reverse = True) 
+    return sorted(values, key=lambda a_entry: a_entry[6], reverse = True) 
 
 def displayNumber(value):
     return 1
@@ -36,10 +40,12 @@ def fillInAthleteInfo(row):
     [paceMin, paceSec] = calculatePace(row['moving_time'],row['distance'])
     distance = float(round(row['distance']/1000,1))
     elevation = int(math.ceil(row['elev_gain']))
-    name = row['athlete_firstname'] + ' ' + row['athlete_lastname']
+    name = row['athlete_firstname'] + ' ' + row['athlete_lastname'] + addPreviousRank(row)
     pace = str(paceMin) + ':' + str(paceSec).zfill(2)
     kj = calculateCoefJulqga(paceMin, paceSec)
     points = calculatePoints(distance, elevation, calculateCoefJulqga(paceMin, paceSec))
+    time = strftime("%H:%M:%S", gmtime(row['moving_time']))
+    prediction = strftime("%H:%M:%S", gmtime(getMarathonPrediction(row)))
 
     athlete = list()
     athlete.append(name)
@@ -47,6 +53,8 @@ def fillInAthleteInfo(row):
     athlete.append(elevation)
     athlete.append(pace)
     athlete.append(kj)
+    athlete.append(time)
+    #athlete.append(prediction)
     athlete.append(points)
 
     return athlete
@@ -57,20 +65,37 @@ def addRank(athletes):
         counter += 1
         row.insert(0, counter)
 
+def addPreviousRank(row):
+    rankingDict = {u'Ники Дерменджиев': 1, u'Triatlet Maffetonssen': 2, u'Nikolay Nachev': 3, u'Валентин Шишков': 4, u'Metodi Georgiev': 5, 
+    u'Radoslav Dachev': 6, u'Lyudmil Nikodimov': 7, u'Alexander Spasov': 8, u'Stella Dimitrova': 9, u'Daniel Kubashliev': 10}
+    key = row['athlete_firstname'] + ' ' + row['athlete_lastname']
+    if key in rankingDict:
+        return ' (' + str(rankingDict[key]) + ')'
+    else:
+        return ''
+
+def getMarathonPrediction(row):
+    [paceMin, paceSec] = calculatePace(row['moving_time'],row['distance'])
+    pace = paceMin + float(round(paceSec/60, 1))
+    distance = float(round(row['distance']/1000,1))
+
+    return (12+98.5*math.exp(-distance/189)+1390/(60/pace))/1440
+
 def addDiff(athletes):
     leaderPoints = 0
     counter = 0
     for row in athletes:
         if leaderPoints == 0:
-            leaderPoints = row[6]
+            leaderPoints = row[7]
             continue
-        diff = float(leaderPoints) - float(row[6])
+        diff = float(leaderPoints) - float(row[7])
         row.append(diff)
 
 def main():
     strava = StravaRequest(StravaConfig.url, StravaConfig.headers)
     leaderboard = strava.getLeaderboard()
-    tableHeaderRow = ['Pos','Athlete', 'Distance[km]', 'D+[m]', 'Pace[min/km]', 'KJ', 'Total', 'Diff']
+    tableHeaderRow = ['Pos','Athlete', 'Distance[km]', 'D+[m]', 'Pace[min/km]', 'KJ', 
+    'Time', 'Total', 'Diff']
 
     values = []
     counter = 1
@@ -81,6 +106,8 @@ def main():
     sortedResults = sortByPoints(values)
     addRank(sortedResults)
     addDiff(sortedResults)
+    #print(sortedResults)
+    #exit()
     sortedResults.insert(0, tableHeaderRow)
     sortedResults.append(['','Last update', now.strftime("%Y-%m-%d %H:%M")])
 
